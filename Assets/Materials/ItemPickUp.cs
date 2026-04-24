@@ -12,7 +12,7 @@ public class ItemPickUp : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            scoreManagerScript.totalScore += 5;
+            scoreManagerScript.TotalScore += 5;
 
             Destroy(gameObject);
         }

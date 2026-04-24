@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,10 +22,17 @@ public class Enemy : MonoBehaviour
     public float sightRange;
     public bool playerInSightRange;
 
+    public Transform SpawnPoint;
+
     private void Awake()
     {
         player = GameObject.Find("First Person Player").transform;
         agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Start()
+    {
+        ScoreManager.Instance.onScoreChanged += Fase;
     }
 
     private void Update()
@@ -33,16 +41,18 @@ public class Enemy : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
 
         if (!playerInSightRange) Patroling();
-        if (playerInSightRange) chaseplayer();
+        else if (playerInSightRange) chaseplayer();
+
+        agent.enabled = !GameManager.Instance.IsGameOver;
     }
     private void Patroling()
     {
         if (!walkPointSet)
         {
             SearchWalkPoint();
-        }
-
-        if (walkPointSet)
+        } 
+        
+        if (walkPointSet && agent.enabled)
         {
             agent.SetDestination(walkPoint);
         }
@@ -53,7 +63,7 @@ public class Enemy : MonoBehaviour
         if (distanceToWalkPoint.magnitude < 1f)
         {
             walkPointSet = false;
-        }
+        } 
     }
 
     private void SearchWalkPoint()
@@ -71,6 +81,31 @@ public class Enemy : MonoBehaviour
     }
     private void chaseplayer()
     {
+        if (!agent.enabled) return;
         agent.SetDestination(player.position);
     }
+
+    private void Fase()
+    {
+        switch (ScoreManager.Instance.TotalScore)
+        {
+            case 50:
+                agent.speed += 0.5f;
+                break;
+            case 100:
+                agent.speed += 1f;
+                break;
+            // Add more cases as needed
+        }
     }
+     public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("Player Detected");
+            other.gameObject.GetComponent<PlayerController>().die();
+            transform.position = SpawnPoint.position;
+        }
+    }
+}
+   
