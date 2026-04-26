@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d1514ac4ff2fd11498bb80482c89f9f5
+guid: 7e5fc0033326ada47a91327832c397ed
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,23 +110,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: whispering abbys ui_0
+      name: WhatsApp Image 2026-04-24 at 15.51.23_0
       rect:
         serializedVersion: 2
-        x: 855
-        y: 950
-        width: 1290
-        height: 1456
+        x: 0
+        y: 0
+        width: 408
+        height: 728
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27bfce32acd025749acd8cb3e152ccc5
-      internalID: -336113397
+      spriteID: 9b5beea0b4c261d44b32680b5f0dae11
+      internalID: -2004930033
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: e29f943eed8e96b46baa3202c140c48f
     internalID: 0
     vertices: []
     indices: 
@@ -143,11 +143,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      whispering abbys ui_0: -336113397
+      WhatsApp Image 2026-04-24 at 15.51.23_0: -2004930033
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

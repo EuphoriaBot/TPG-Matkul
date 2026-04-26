@@ -22,12 +22,13 @@ public class Enemy : MonoBehaviour
     public float sightRange;
     public bool playerInSightRange;
 
-    public Transform SpawnPoint;
+    private Vector3 SpawnPoint;
 
     private void Awake()
     {
         player = GameObject.Find("First Person Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        SpawnPoint = transform.position;
     }
 
     private void Start()
@@ -104,7 +105,7 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Player Detected");
             other.gameObject.GetComponent<PlayerController>().die();
-            transform.position = SpawnPoint.position;
+            transform.position = SpawnPoint;
         }
     }
 }
