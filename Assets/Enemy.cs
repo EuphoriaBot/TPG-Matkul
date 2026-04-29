@@ -85,17 +85,17 @@ public class Enemy : MonoBehaviour
 
     private void Fase()
     {
-        int score = ScoreManager.Instance.TotalScore;
-
-        if (score >= 100)
+        switch(ScoreManager.Instance.TotalScore)
         {
-            agent.speed = 5f;
-        }
-        else if (score >= 50)
-        {
-            agent.speed = 3.5f;
+            case 50:
+                agent.speed += 0.5f;
+                break;
+            case 100:
+                agent.speed += 1f;
+                break;
         }
     }
+    
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
