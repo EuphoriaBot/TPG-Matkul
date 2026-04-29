@@ -31,20 +31,17 @@ public class Enemy : MonoBehaviour
         SpawnPoint = transform.position;
     }
 
-    private void Start()
-    {
-        ScoreManager.Instance.onScoreChanged += Fase;
-    }
 
     private void Update()
     {
-        //Check for sight of player
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
 
         if (!playerInSightRange) Patroling();
         else if (playerInSightRange) chaseplayer();
 
         agent.enabled = !GameManager.Instance.IsGameOver;
+
+        Fase(); 
     }
     private void Patroling()
     {
@@ -88,18 +85,18 @@ public class Enemy : MonoBehaviour
 
     private void Fase()
     {
-        switch (ScoreManager.Instance.TotalScore)
+        int score = ScoreManager.Instance.TotalScore;
+
+        if (score >= 100)
         {
-            case 50:
-                agent.speed += 0.5f;
-                break;
-            case 100:
-                agent.speed += 1f;
-                break;
-            // Add more cases as needed
+            agent.speed = 5f;
+        }
+        else if (score >= 50)
+        {
+            agent.speed = 3.5f;
         }
     }
-     public void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {

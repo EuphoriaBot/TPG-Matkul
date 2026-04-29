@@ -4,11 +4,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private int life = 5;
-    public Transform SpawnPoint;
+    public Vector3 SpawnPos;
     public Transform Player;
 
     public bool IsGameOver { get; private set; } = false;
 
+    void Awake()
+    {
+        SpawnPos = Player.position;
+    }
     void Start()
     {
         SpawnPlayer();
@@ -35,7 +39,7 @@ public class GameManager : MonoBehaviour
     public void SpawnPlayer()
     {
         IsGameOver = false;
-        Player.position = SpawnPoint.position; 
+        Player.position = SpawnPos; 
         Player.GetComponent<CharacterController>().enabled = true;
     }
 

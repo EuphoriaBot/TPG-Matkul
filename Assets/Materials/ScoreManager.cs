@@ -1,20 +1,15 @@
-using System;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private int totalScore;
-    public int TotalScore
+    public int TotalScore = 0;
+
+    public void AddScore(int amount)
     {
-        get => totalScore;
-        set
-        {
-            totalScore = value;
-            onScoreChanged?.Invoke();
-        }
+        TotalScore += amount;
+        Debug.Log("Score sekarang: " + TotalScore);
     }
-    public Action onScoreChanged;
+
     private static ScoreManager s_instance;
     public static ScoreManager Instance
     {
@@ -27,5 +22,4 @@ public class ScoreManager : MonoBehaviour
             return s_instance;
         }
     }
-
 }

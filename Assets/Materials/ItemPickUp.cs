@@ -2,20 +2,18 @@ using UnityEngine;
 
 public class ItemPickUp : MonoBehaviour
 {
-    public ScoreManager scoreManagerScript;
-    void Start()
-    {
-        scoreManagerScript = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-    }
+    public ScoreManager scoreManagerScript => ScoreManager.Instance;
+    public AudioSource crystalSound;
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            scoreManagerScript.TotalScore += 5;
+            scoreManagerScript.AddScore(5);
+
+            AudioSource.PlayClipAtPoint(crystalSound.clip, transform.position);
 
             Destroy(gameObject);
         }
-
     }
 }
