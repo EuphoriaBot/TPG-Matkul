@@ -1,8 +1,21 @@
+using System;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int TotalScore = 0;
+    private int _TotalScore = 0;
+
+    public int TotalScore
+    {
+        get => _TotalScore;
+        set
+        {
+            _TotalScore = value;
+            OnScoreUpdated?.Invoke();
+        }
+    }
+
+    public Action OnScoreUpdated;
 
     public void AddScore(int amount)
     {

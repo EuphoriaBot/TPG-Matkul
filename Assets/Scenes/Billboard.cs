@@ -1,16 +1,17 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Billboard : MonoBehaviour
 {
-    private Transform camTrasform;
+    private Transform camTransform;
     
     void Start()
     {
-        camTrasform = Camera.main.transform;
+        camTransform = Camera.main.transform;
     }
 
     void LateUpdate()
     {
-        transform.LookAt(transform.position + camTrasform.forward);
+        transform.forward = new Vector3(camTransform.forward.x, 0, camTransform.forward.z);
     }
 }

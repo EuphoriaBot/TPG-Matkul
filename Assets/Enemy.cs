@@ -22,13 +22,21 @@ public class Enemy : MonoBehaviour
     public float sightRange;
     public bool playerInSightRange;
 
-    private Vector3 SpawnPoint;
+    public Transform SpawnPoint;
+
+    private float searchCooldown = 0f;
+    private float searchInterval = 0.5f; // cari walkpoint setiap 0.5 detik
 
     private void Awake()
     {
         player = GameObject.Find("First Person Player").transform;
         agent = GetComponent<NavMeshAgent>();
-        SpawnPoint = transform.position;
+    }
+
+    public void Start()
+    {
+        // SpawnPoint = transform.position;
+        ScoreManager.Instance.OnScoreUpdated += Fase;
     }
 
 
@@ -39,17 +47,20 @@ public class Enemy : MonoBehaviour
         if (!playerInSightRange) Patroling();
         else if (playerInSightRange) chaseplayer();
 
-        agent.enabled = !GameManager.Instance.IsGameOver;
-
-        Fase(); 
+        // agent.enabled = !GameManager.Instance.IsGameOver; 
     }
     private void Patroling()
     {
         if (!walkPointSet)
         {
-            SearchWalkPoint();
-        } 
-        
+            searchCooldown -= Time.deltaTime;
+            if (searchCooldown <= 0f)
+            {
+                SearchWalkPoint();
+                searchCooldown = searchInterval;
+            }
+        }
+
         if (walkPointSet && agent.enabled)
         {
             agent.SetDestination(walkPoint);
@@ -57,24 +68,31 @@ public class Enemy : MonoBehaviour
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-        //Walkpoint reached
         if (distanceToWalkPoint.magnitude < 1f)
         {
             walkPointSet = false;
-        } 
+        }
     }
-
     private void SearchWalkPoint()
     {
-        //Calculate random point in range
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        Vector3 randomPoint = new Vector3(
+            transform.position.x + randomX,
+            transform.position.y,
+            transform.position.z + randomZ
+        );
 
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, walkPointRange, NavMesh.AllAreas))
         {
+            walkPoint = hit.position;
             walkPointSet = true;
+            Debug.Log("Walkpoint ditemukan: " + walkPoint);
+        }
+        else
+        {
+            Debug.Log("NavMesh sample gagal");
         }
     }
     private void chaseplayer()
@@ -95,14 +113,18 @@ public class Enemy : MonoBehaviour
                 break;
         }
     }
-    
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             Debug.Log("Player Detected");
+
+            agent.enabled = false;
+            transform.position = SpawnPoint.position;
+            agent.enabled = true;
             other.gameObject.GetComponent<PlayerController>().die();
-            transform.position = SpawnPoint;
+            walkPointSet = false;
         }
     }
 }
