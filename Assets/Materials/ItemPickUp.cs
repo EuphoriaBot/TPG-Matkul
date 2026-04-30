@@ -11,7 +11,15 @@ public class ItemPickUp : MonoBehaviour
         {
             scoreManagerScript.AddScore(5);
 
-            AudioSource.PlayClipAtPoint(crystalSound.clip, transform.position);
+            GameObject tempGO = new GameObject("TempAudio");
+            tempGO.transform.position = transform.position;
+            AudioSource aSource = tempGO.AddComponent<AudioSource>();
+
+            aSource.clip = crystalSound.clip;
+            aSource.pitch = Random.Range(0.9f, 1.1f);
+
+            aSource.Play();
+            Destroy(tempGO, crystalSound.clip.length);
 
             Destroy(gameObject);
         }
