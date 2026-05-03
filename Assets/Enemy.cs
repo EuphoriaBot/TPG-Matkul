@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
@@ -20,7 +22,27 @@ public class Enemy : MonoBehaviour
 
     //states
     public float sightRange;
-    public bool playerInSightRange;
+    private bool _playerInSightRange;
+    public bool playerInSightRange
+    {
+        get => _playerInSightRange;
+        set
+        {
+            if (_playerInSightRange != value)
+            {
+                _playerInSightRange = value;
+
+                Enemy[] Enemies = GameManager.Instance.GetAllEnemies();
+
+                if (Enemies.FirstOrDefault(x => x._playerInSightRange)) {
+                    BacksoundManager.Instance.Chase();
+                } else
+                {
+                    BacksoundManager.Instance.Calm();
+                }
+            }
+        }
+    }
 
     public Transform SpawnPoint;
 

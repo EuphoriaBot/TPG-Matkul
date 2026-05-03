@@ -43,6 +43,11 @@ public class GameManager : MonoBehaviour
         Player.GetComponent<CharacterController>().enabled = true;
     }
 
+    public Enemy[]GetAllEnemies()
+    {
+        return FindObjectsByType<Enemy>(FindObjectsSortMode.None);
+    } 
+
     private static GameManager s_instance;
     public static GameManager Instance
     {
@@ -55,6 +60,4 @@ public class GameManager : MonoBehaviour
             return s_instance;
         }
     }
-
-
 }
