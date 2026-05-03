@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 
 public class UiController : MonoBehaviour
 {
     public List<GameObject> GameOverPanels;
+    public TMP_Text ScoreText;
     public void ShowGameOverPanel(int life)
     {
         GameOverPanels[math.clamp(life, 0, GameOverPanels.Count - 1)].SetActive(true);
@@ -18,6 +20,11 @@ public class UiController : MonoBehaviour
         }
     }
     
+    public void SetScore(int score)
+    {
+        ScoreText.SetText(score.ToString());
+    }
+
     private static UiController s_instance;
     public static UiController Instance
     {

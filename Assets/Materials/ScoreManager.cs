@@ -12,10 +12,16 @@ public class ScoreManager : MonoBehaviour
         {
             _TotalScore = value;
             OnScoreUpdated?.Invoke();
+            UiController.Instance.SetScore(_TotalScore);
         }
     }
 
     public Action OnScoreUpdated;
+
+    void Start()
+    {
+        TotalScore = 0;
+    }
 
     public void AddScore(int amount)
     {
