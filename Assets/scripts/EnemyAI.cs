@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,13 +21,32 @@ public class EnemyAI : MonoBehaviour
     private int maxSearchAttempts = 10;
 
     public float sightRange;
-    private bool playerInSightRange;
+    private bool _playerInSightRange;
+    public bool playerInSightRange
+    {
+        get { return _playerInSightRange; }
+        set
+        {
+            if (_playerInSightRange != value)
+            {
+                _playerInSightRange = value;
+                OnPlayerSpotted?.Invoke();
+            }
+        }
+    }
+
+    public Action OnPlayerSpotted;
 
     void Awake()
     {
         player = GameObject.Find("First Person Player").transform;
         agent = GetComponent<NavMeshAgent>();
         lastPosition = transform.position;
+    }
+
+    void Start()
+    {
+        OnPlayerSpotted += BacksoundManager.Instance.EnemyBacksound;
     }
 
     void Update()
@@ -81,8 +101,8 @@ public class EnemyAI : MonoBehaviour
     {
         for (int i = 0; i < maxSearchAttempts; i++)
         {
-            float randomZ = Random.Range(-walkPointRange, walkPointRange);
-            float randomX = Random.Range(-walkPointRange, walkPointRange);
+            float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
+            float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
 
             Vector3 candidate = new Vector3(
                 transform.position.x + randomX,

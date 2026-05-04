@@ -12,6 +12,24 @@ public class BacksoundManager : MonoBehaviour
         Backsound = GetComponent<AudioSource>();
     }
 
+    void Start()
+    {
+        EnemyBacksound();
+    }
+
+    public void EnemyBacksound()
+    {
+        Enemy[] enemy = GameManager.Instance.GetAllEnemies();
+        foreach (Enemy e in enemy)
+        {
+            if (e.ai.playerInSightRange)
+            {
+                Chase();
+                return;
+            }
+        }
+        Calm();
+    }
     public void Calm()
     {
         if ((Object)Backsound.generator == (Object)CalmBacksound) return;
