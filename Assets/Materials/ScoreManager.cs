@@ -20,12 +20,12 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        TotalScore = 0;
+        TotalScore = 1195;
     }
 
     public void AddScore(int amount)
     {
-        TotalScore += amount;
+        TotalScore -= amount;
         Debug.Log("Score sekarang: " + TotalScore);
     }
 
