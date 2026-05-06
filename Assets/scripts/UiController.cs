@@ -7,6 +7,8 @@ public class UiController : MonoBehaviour
 {
     public List<GameObject> GameOverPanels;
     public TMP_Text ScoreText;
+
+    public GameObject TutorialPanel;
     public void ShowGameOverPanel(int life)
     {
         GameOverPanels[math.clamp(life, 0, GameOverPanels.Count - 1)].SetActive(true);
@@ -18,6 +20,15 @@ public class UiController : MonoBehaviour
         {
             panel.SetActive(false);
         }
+    }
+    
+    public void ShowTutorial()
+    {
+        TutorialPanel.SetActive(true);
+    }
+    public void HideTutorial()
+    {
+        TutorialPanel.SetActive(false);
     }
     
     public void SetScore(int score)
