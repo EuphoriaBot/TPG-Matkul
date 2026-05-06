@@ -9964,7 +9964,7 @@ MonoBehaviour:
   - {fileID: 532113789}
   - {fileID: 823747952}
   ScoreText: {fileID: 22313004}
-  TutorialPanel: {fileID: 0}
+  TutorialPanel: {fileID: 1274550429}
 --- !u!1001 &139730448
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78809,10 +78809,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1274550430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 159.99951, y: -19}
-  m_SizeDelta: {x: 1000, y: 500}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1228783526
 MonoBehaviour:
@@ -82096,6 +82096,7 @@ GameObject:
   - component: {fileID: 1274550430}
   - component: {fileID: 1274550432}
   - component: {fileID: 1274550431}
+  - component: {fileID: 1274550433}
   m_Layer: 5
   m_Name: TutorialPanel
   m_TagString: Untagged
@@ -82111,7 +82112,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274550429}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -82120,7 +82121,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1922, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1274550431
@@ -82161,6 +82162,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274550429}
   m_CullTransparentMesh: 1
+--- !u!114 &1274550433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274550429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd87bf6438492e4bad118e551275154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tutorial
 --- !u!1 &1274664837
 GameObject:
   m_ObjectHideFlags: 0
