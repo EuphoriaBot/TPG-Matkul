@@ -32,10 +32,19 @@ public class Enemy : MonoBehaviour
     {
         switch(ScoreManager.Instance.TotalScore)
         {
-            case 50:
+            case 200:
                 ai.agent.speed += 0.5f;
                 break;
+            case 150:
+                ai.agent.speed += 1f;
+                break;
             case 100:
+                ai.agent.speed += 0.5f;
+                break;
+            case 50:
+                ai.agent.speed += 1f;
+                break;
+            case 10:
                 ai.agent.speed += 1f;
                 break;
         }

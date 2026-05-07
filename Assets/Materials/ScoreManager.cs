@@ -1,8 +1,12 @@
+using NUnit.Framework;
 using System;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 public class ScoreManager : MonoBehaviour
 {
+    public List<ItemPickUp> CrystalList;
     private int _TotalScore = 0;
 
     public int TotalScore
@@ -18,9 +22,14 @@ public class ScoreManager : MonoBehaviour
 
     public Action OnScoreUpdated;
 
+    void Awake()
+    {
+        CrystalList = FindObjectsByType<ItemPickUp>(FindObjectsSortMode.None).ToList();
+    }
+
     void Start()
     {
-        TotalScore = 1195;
+        TotalScore = CrystalList.Count;
     }
 
     public void AddScore(int amount)

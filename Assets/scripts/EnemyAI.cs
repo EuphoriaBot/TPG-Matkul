@@ -99,6 +99,7 @@ public class EnemyAI : MonoBehaviour
 
     private void SearchWalkPoint()
     {
+        Debug.Log("DimasDimasdimasd");
         for (int i = 0; i < maxSearchAttempts; i++)
         {
             float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
@@ -110,19 +111,24 @@ public class EnemyAI : MonoBehaviour
                 transform.position.z + randomZ
             );
 
-            if (!Physics.Raycast(candidate, Vector3.down, 2f, whatIsGround))
+            Debug.Log(candidate);
+            if (!Physics.Raycast(candidate, Vector3.down, 20f, whatIsGround))
                 continue;
+            Debug.Log("uf satu");
 
             NavMeshHit hit;
             if (!NavMesh.SamplePosition(candidate, out hit, 1.5f, NavMesh.AllAreas))
                 continue;
+            Debug.Log("if dua");
 
             NavMeshPath path = new NavMeshPath();
             if (!agent.CalculatePath(hit.position, path))
                 continue;
+            Debug.Log("if tiga");
 
             if (path.status != NavMeshPathStatus.PathComplete)
                 continue;
+            Debug.Log("if empat");
 
             walkPoint = hit.position;
             walkPointSet = true;

@@ -9,7 +9,7 @@ public class ItemPickUp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            scoreManagerScript.AddScore(5);
+            scoreManagerScript.AddScore(1);
 
             GameObject tempGO = new GameObject("TempAudio");
             tempGO.transform.position = transform.position;
