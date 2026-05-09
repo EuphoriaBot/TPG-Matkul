@@ -9,6 +9,13 @@ public class GameManager : MonoBehaviour
 
     public bool IsGameOver { get; private set; } = false;
 
+    public Transform PointerPoint;
+
+    public int StartCrystalHint = 30;
+
+    public bool IsPaused { get; private set; } = false;
+
+    
     void Awake()
     {
         SpawnPos = Player.position;
@@ -17,6 +24,53 @@ public class GameManager : MonoBehaviour
     {
         SpawnPlayer();
         UiController.Instance.HideGameOverPanel();
+        UiController.Instance.ShowPausePanel(false);
+        UiController.Instance.ShowTutorial();
+        ScoreManager.Instance.OnScoreUpdated += () => {
+            if (ScoreManager.Instance.TotalScore == 0)
+            {
+                UiController.Instance.SetObjectiveText("- Kristal telah habis, cari portal keluar!");
+            }
+        };
+    }
+
+    void Update()
+    {
+        if (!IsGameOver && !IsPaused)
+        {
+            GetNearestCrystal();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space)){
+            ToggleObjectivePanel();
+        }
+    }
+    
+    public void GetNearestCrystal()
+    {
+        ItemPickUp[] itemPickUps = GetAllItemPickups();
+        if (itemPickUps.Length > StartCrystalHint)
+        {
+            PointerPoint = null;
+            return;
+        } 
+        if (itemPickUps.Length == 0)
+        {
+            PointerPoint = FindFirstObjectByType<Portal>()?.transform;
+            return;
+        }
+        foreach (ItemPickUp item in itemPickUps)
+        {
+            if (PointerPoint == null || Vector3.Distance(Player.position, item.transform.position) < Vector3.Distance(Player.position, PointerPoint.position))
+            {
+                PointerPoint = item.transform;
+            }
+        }
     }
 
     public IEnumerator Gameover()
@@ -47,6 +101,24 @@ public class GameManager : MonoBehaviour
     {
         return FindObjectsByType<Enemy>(FindObjectsSortMode.None);
     } 
+
+    public ItemPickUp[] GetAllItemPickups()
+    {
+        return FindObjectsByType<ItemPickUp>(FindObjectsSortMode.None);
+    }
+
+    public void TogglePause()
+    {
+        IsPaused = !IsPaused;
+        Time.timeScale = IsPaused ? 0f : 1f;
+        UiController.Instance.ShowPausePanel(IsPaused);
+    }
+    
+    public void ToggleObjectivePanel()
+    {
+        bool isActive = UiController.Instance.ObjectivePanel.activeSelf;
+        UiController.Instance.ShowObjectivePanel(!isActive);
+    }
 
     private static GameManager s_instance;
     public static GameManager Instance
