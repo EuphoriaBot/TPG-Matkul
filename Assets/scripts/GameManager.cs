@@ -123,6 +123,8 @@ public class GameManager : MonoBehaviour
 
         Cursor.visible = IsPaused;
         Cursor.lockState = IsPaused ? CursorLockMode.None : CursorLockMode.Locked;
+
+        Debug.Log("IsPaused: " + IsPaused + " | Cursor visible: " + Cursor.visible + " | LockState: " + Cursor.lockState);
     }
 
     public void ToggleObjectivePanel()
