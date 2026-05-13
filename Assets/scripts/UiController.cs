@@ -80,4 +80,15 @@ public class UiController : MonoBehaviour
             return s_instance;
         }
     }
+
+    public void ResumeGame()
+    {
+        GameManager.Instance.TogglePause();
+    }
+
+    public void QuitToMainMenu()
+    {
+        Time.timeScale = 1f; 
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
 }

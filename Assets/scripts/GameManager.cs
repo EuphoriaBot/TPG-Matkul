@@ -15,13 +15,16 @@ public class GameManager : MonoBehaviour
 
     public bool IsPaused { get; private set; } = false;
 
-    
     void Awake()
     {
         SpawnPos = Player.position;
     }
+
     void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         SpawnPlayer();
         UiController.Instance.HideGameOverPanel();
         UiController.Instance.ShowPausePanel(false);
@@ -46,11 +49,12 @@ public class GameManager : MonoBehaviour
             TogglePause();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)){
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
             ToggleObjectivePanel();
         }
     }
-    
+
     public void GetNearestCrystal()
     {
         ItemPickUp[] itemPickUps = GetAllItemPickups();
@@ -58,7 +62,7 @@ public class GameManager : MonoBehaviour
         {
             PointerPoint = null;
             return;
-        } 
+        }
         if (itemPickUps.Length == 0)
         {
             PointerPoint = FindFirstObjectByType<Portal>()?.transform;
@@ -101,10 +105,10 @@ public class GameManager : MonoBehaviour
         Player.GetComponent<CharacterController>().enabled = true;
     }
 
-    public Enemy[]GetAllEnemies()
+    public Enemy[] GetAllEnemies()
     {
         return FindObjectsByType<Enemy>(FindObjectsSortMode.None);
-    } 
+    }
 
     public ItemPickUp[] GetAllItemPickups()
     {
@@ -116,8 +120,11 @@ public class GameManager : MonoBehaviour
         IsPaused = !IsPaused;
         Time.timeScale = IsPaused ? 0f : 1f;
         UiController.Instance.ShowPausePanel(IsPaused);
+
+        Cursor.visible = IsPaused;
+        Cursor.lockState = IsPaused ? CursorLockMode.None : CursorLockMode.Locked;
     }
-    
+
     public void ToggleObjectivePanel()
     {
         bool isActive = UiController.Instance.ObjectivePanel.activeSelf;
