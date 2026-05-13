@@ -7,6 +7,7 @@ public class UiController : MonoBehaviour
 {
     public List<GameObject> GameOverPanels;
     public TMP_Text ScoreText;
+    public GameObject ScorePanel;
 
     public GameObject TutorialPanel;
     public GameObject PausePanel;
@@ -40,6 +41,11 @@ public class UiController : MonoBehaviour
     public void SetScore(int score)
     {
         ScoreText.SetText(score.ToString());
+    }
+
+    public void ShowScorePanel(bool show)
+    {
+        ScorePanel.SetActive(show);
     }
 
     public void ShowPausePanel(bool show)

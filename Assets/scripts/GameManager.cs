@@ -80,20 +80,24 @@ public class GameManager : MonoBehaviour
 
         UiController.Instance.ShowGameOverPanel(life);
         yield return new WaitForSeconds(2f);
-        
+
         if (life <= 0)
         {
+            UiController.Instance.ShowScorePanel(false);
+            UiController.Instance.ShowObjectivePanel(false);
             Debug.Log("Game Over");
-        }   else if (life > 0)
+        }
+        else if (life > 0)
         {
             SpawnPlayer();
             UiController.Instance.HideGameOverPanel();
         }
     }
+
     public void SpawnPlayer()
     {
         IsGameOver = false;
-        Player.position = SpawnPos; 
+        Player.position = SpawnPos;
         Player.GetComponent<CharacterController>().enabled = true;
     }
 
