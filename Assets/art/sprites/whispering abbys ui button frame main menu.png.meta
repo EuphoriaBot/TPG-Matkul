@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 865be0268f2ec6349ae55a3a119b10e0
+guid: 9467e8962c0777140b34109b1d22081a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: whispering abbys ui resume butten_0
+      name: whispering abbys ui button frame main menu_0
       rect:
         serializedVersion: 2
         x: 765
@@ -118,15 +118,15 @@ TextureImporter:
         width: 1434
         height: 491
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99d15f02564e76149b733b168c8d8ebb
-      internalID: -2139641331
+      spriteID: a9cd0ce8afe0c36419bd31a9c427ec16
+      internalID: 265699337
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: db42401b6525f8c4ea199746845d0f62
+    spriteID: 3aa7ab6ff588ca541890dd40e57688a8
     internalID: 0
     vertices: []
     indices: 
@@ -143,11 +143,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      whispering abbys ui resume butten_0: -2139641331
+      whispering abbys ui button frame main menu_0: 265699337
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

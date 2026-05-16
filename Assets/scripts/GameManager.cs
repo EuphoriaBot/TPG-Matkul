@@ -89,6 +89,12 @@ public class GameManager : MonoBehaviour
         {
             UiController.Instance.ShowScorePanel(false);
             UiController.Instance.ShowObjectivePanel(false);
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            Time.timeScale = 0f;
+
             Debug.Log("Game Over");
         }
         else if (life > 0)

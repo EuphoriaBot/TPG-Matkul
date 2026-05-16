@@ -43,6 +43,11 @@ public class Portal : MonoBehaviour
         {
             congratulationsText.SetActive(true);
 
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            Time.timeScale = 0f;
+
             Debug.Log("Congratulations!");
         }
     }

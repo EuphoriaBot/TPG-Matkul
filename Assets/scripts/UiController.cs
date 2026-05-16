@@ -88,7 +88,7 @@ public class UiController : MonoBehaviour
 
     public void QuitToMainMenu()
     {
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }
