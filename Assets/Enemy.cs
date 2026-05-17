@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     public Transform SpawnPoint;
 
     private float searchCooldown = 0f;
-    private float searchInterval = 0.5f; // cari walkpoint setiap 0.5 detik
+    private float searchInterval = 0.5f; 
 
    void Awake()
     {
@@ -23,7 +23,6 @@ public class Enemy : MonoBehaviour
 
     public void Start()
     {
-        // SpawnPoint = transform.position;
         ScoreManager.Instance.OnScoreUpdated += Fase;
     }
 
