@@ -109,6 +109,11 @@ public class GameManager : MonoBehaviour
         IsGameOver = false;
         Player.position = SpawnPos;
         Player.GetComponent<CharacterController>().enabled = true;
+
+        foreach (Enemy enemy in GetAllEnemies())
+        {
+            enemy.ResetToSpawnPoint();
+        }
     }
 
     public Enemy[] GetAllEnemies()

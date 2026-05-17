@@ -54,13 +54,22 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Debug.Log("Player Detected");
+            Enemy[] allEnemies = GameManager.Instance.GetAllEnemies();
+            foreach (Enemy enemy in allEnemies)
+            {
+                enemy.ResetToSpawnPoint();
+            }
 
-            ai.agent.enabled = false;
-            transform.position = SpawnPoint.position;
-            ai.agent.enabled = true;
             other.gameObject.GetComponent<PlayerController>().die();
-            ai.walkPointSet = false;
         }
+    }
+
+    public void ResetToSpawnPoint()
+    {
+        ai.agent.enabled = false;
+        transform.position = SpawnPoint.position;
+        ai.agent.enabled = true;
+        ai.walkPointSet = false;
     }
 }
    
