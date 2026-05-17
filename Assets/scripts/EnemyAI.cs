@@ -99,41 +99,28 @@ public class EnemyAI : MonoBehaviour
 
     private void SearchWalkPoint()
     {
-        Debug.Log("DimasDimasdimasd");
         for (int i = 0; i < maxSearchAttempts; i++)
         {
-            float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
-            float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
-
-            Vector3 candidate = new Vector3(
-                transform.position.x + randomX,
+            Vector3 randomPoint = new Vector3(
+                UnityEngine.Random.Range(-100f, 100f),
                 transform.position.y,
-                transform.position.z + randomZ
+                UnityEngine.Random.Range(-100f, 100f)
             );
 
-            Debug.Log(candidate);
-            if (!Physics.Raycast(candidate, Vector3.down, 20f, whatIsGround))
-                continue;
-            Debug.Log("uf satu");
-
             NavMeshHit hit;
-            if (!NavMesh.SamplePosition(candidate, out hit, 1.5f, NavMesh.AllAreas))
-                continue;
-            Debug.Log("if dua");
 
-            NavMeshPath path = new NavMeshPath();
-            if (!agent.CalculatePath(hit.position, path))
-                continue;
-            Debug.Log("if tiga");
+            if (NavMesh.SamplePosition(randomPoint, out hit, 20f, NavMesh.AllAreas))
+            {
+                NavMeshPath path = new NavMeshPath();
 
-            if (path.status != NavMeshPathStatus.PathComplete)
-                continue;
-            Debug.Log("if empat");
-
-            walkPoint = hit.position;
-            walkPointSet = true;
-            stuckTimer = 0f;
-            return;
+                if (agent.CalculatePath(hit.position, path) &&
+                    path.status == NavMeshPathStatus.PathComplete)
+                {
+                    walkPoint = hit.position;
+                    walkPointSet = true;
+                    return;
+                }
+            }
         }
     }
 
